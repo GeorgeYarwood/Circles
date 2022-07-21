@@ -7,14 +7,21 @@ public class Hole : MonoBehaviour
     // Start is called before the first frame update
     public float radius;
     int scoreToAdd =0;
-    //Time before the hole self distructs
-    public float ttl;
     CircleController circleController;
+    bool dropNow;
 
     void Start()
     {
         gameObject.transform.localScale = new Vector3(radius, radius, 0);
         circleController = FindObjectOfType<CircleController>();
+        dropNow = false;
+    }
+
+    IEnumerator AutoDropTimer()
+    {
+        yield return new WaitForSeconds(1.5f);
+        dropNow = true;
+
     }
 
     // Update is called once per frame
@@ -22,12 +29,13 @@ public class Hole : MonoBehaviour
     {
         radius = gameObject.transform.localScale.x;
 
+
+
     }
 
 
     void OnTriggerExit(Collider collision)
     {
-
         Circle thisCircle;
         //If a circle hits this hole
         if (thisCircle = collision.gameObject.GetComponent<Circle>())
@@ -50,9 +58,10 @@ public class Hole : MonoBehaviour
             //If it's directly over it (Factoring in leniency)
             if (Mathf.Abs(PosDiffX) <= 0.4 && Mathf.Abs(PosDiffY) <= 0.4)
             {
+                //Start timer for auto-drop
+                StartCoroutine(AutoDropTimer());
                 float absRadDiff = Mathf.Abs(RadDiff);
                 //If the radius is the same (Factoring in leniency)
-
 
                 if (absRadDiff <= circleController.greenVal)
                 {
@@ -71,7 +80,7 @@ public class Hole : MonoBehaviour
                     scoreToAdd = -5;
                 }
 
-                if (!circleController.holding)
+                if (!circleController.holding || dropNow)
                 {
                     //Tell controller to spawn a new circle and hole
                     Handheld.Vibrate();
@@ -82,7 +91,6 @@ public class Hole : MonoBehaviour
                     Destroy(thisCircle);
                     circleController.holesInScene--;
 
-                  
                     circleController.AddScore(scoreToAdd);
                     gameObject.SetActive(false);
                     circleController.SpawnNewCircle();
