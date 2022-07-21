@@ -50,9 +50,9 @@ public class CircleController : MonoBehaviour
         
     }
 
-    public void AddScore()
+    public void AddScore(int amount)
     {
-        currScore++;
+        currScore+= amount;
     }
 
    
