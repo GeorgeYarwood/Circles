@@ -14,23 +14,25 @@ public class CircleController : MonoBehaviour
     private float initialDistance;
     private Vector3 initialScale;
 
-    float radMax = 0.55f;
+    float radMax = 0.45f;
     float radMin = 0.3f;
 
     public bool holding;
     public bool overCircle;
     public int holesToSpawn;
+    public bool dontUpdateCirclePos;
     int currLvl;
     float xPos = 0, yPos = 0, rad = 0;
     int currScore;
     public Text currScoreTxt;
+    public Text currHolesTxt;
 
     public GameObject circleSpawnPoint;
 
     public GameObject gameOverScreen;
 
     //Time between each circle spawn
-    public float waitTimer = 10f;
+    public float waitTimer;
 
     bool dragging;
 
@@ -89,9 +91,10 @@ public class CircleController : MonoBehaviour
     {
         for(int i = 0; i < holesInScene.Count; i++)
         {
-            //lesInScene[i].gameObject.SetActive(false);
-            DestroyImmediate(holesInScene[i].gameObject);
-            
+            if(holesInScene[i] != null)
+            {
+                Destroy(holesInScene[i].gameObject);
+            }           
         }
         holesInScene.Clear();
     }
@@ -106,7 +109,7 @@ public class CircleController : MonoBehaviour
         //thisCircle.radius = rad;
 
         Circle thisCircle = Instantiate(circlePrefab, circleSpawnPoint.transform.position, Quaternion.identity);
-        thisCircle.radius = 0.5f;
+        thisCircle.radius = 0.45f;
         currCircle = thisCircle.gameObject;
     }
 
@@ -130,6 +133,24 @@ public class CircleController : MonoBehaviour
         
     }
 
+    public void DestroyThisHole(Hole thisHole)
+    {
+        for(int i = 0; i< holesInScene.Count; i++)
+        {
+            if(holesInScene [i] == thisHole)
+            {
+                Destroy(holesInScene[i].gameObject);
+                holesInScene.RemoveAt(i);
+            }
+        }
+        overCircle = false;
+        holding = false;
+        //StartCoroutine(WaitToUpdateCirclePos());
+        ResetCirclePosAndColour();
+        dontUpdateCirclePos = true;
+
+    }
+
     void EndGame()
     {
         gameOverScreen.SetActive(true);
@@ -148,7 +169,7 @@ public class CircleController : MonoBehaviour
     Vector2 RandDistribute(ref float xPos, ref float yPos, ref float rad)
     {
         xPos = Random.Range(-1.6f, 1.6f);
-        yPos = Random.Range(-4.1f, 4.1f);
+        yPos = Random.Range(-2f, 4.1f);
         rad = Random.Range(radMin, radMax);
 
         Vector2 potentialPos = new Vector2(xPos, yPos);
@@ -166,6 +187,7 @@ public class CircleController : MonoBehaviour
         gameOverScreen.SetActive(false);
         currScore = 0;
         DeleteAllHoles();
+        SpawnNewHole();
         StartCoroutine(NewHoleTimer());
         ResetCirclePosAndColour();
        
@@ -184,33 +206,53 @@ public class CircleController : MonoBehaviour
         
     }
 
+    IEnumerator JustReleasedFingerCooldown()
+    {
+        dontUpdateCirclePos = true;
+        yield return new WaitForEndOfFrame();
+        dontUpdateCirclePos = false;
+    }
+
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         currScoreTxt.text = currScore.ToString();
-
-        if(currScore < 0)
+        currHolesTxt.text = holesInScene.Count.ToString() + "/" + holesToSpawn.ToString();
+        //Only run when game isn't over
+        if (!gameOverScreen.activeInHierarchy) 
         {
-            EndGame();
-        }
 
-        if (Input.touchCount == 0)
-        {
-            holding = false;
-            if (!overCircle)
+           
+            if (currScore < 0)
             {
-                ResetCirclePosAndColour();
+                EndGame();
             }
-        }
 
-        else if (Input.touchCount > 0)
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+            if (Input.touchCount == 0)
             {
-                    if(Input.touchCount >=1)
+                holding = false;
+                if (dontUpdateCirclePos)
+                {
+                    dontUpdateCirclePos = false;
+                }
+                if (!overCircle)
+                {
+                    ResetCirclePosAndColour();
+                }
+               
+                
+
+
+            }
+
+            else if (Input.touchCount > 0 && !dontUpdateCirclePos)
+            {
+                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+                RaycastHit hit;
+
+                if (Physics.Raycast(ray, out hit, Mathf.Infinity))
+                {
+                    if (Input.touchCount >= 1)
                     {
                         holding = true;
 
@@ -237,15 +279,18 @@ public class CircleController : MonoBehaviour
                             }
                         }
                     }
+                }
+            }
+
+            if (holding && !dontUpdateCirclePos)
+            {
+                Vector2 currPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+
+                //currCircle.GetComponent<Rigidbody>().isKinematic = true;
+                currCircle.transform.position = new Vector2(currPos.x, currPos.y);
             }
         }
 
-        if (holding)
-        {
-            Vector2 currPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
-
-            //currCircle.GetComponent<Rigidbody>().isKinematic = true;
-            currCircle.transform.position = new Vector2(currPos.x, currPos.y);
-        }
+        
     }
 }

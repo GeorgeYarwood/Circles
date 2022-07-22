@@ -65,7 +65,7 @@ public class Hole : MonoBehaviour
   
     void OnTriggerStay(Collider collision)
     {
-        circleController.overCircle = true;
+        
         Circle thisCircle;
         //If a circle hits this hole
         if (thisCircle = collision.gameObject.GetComponent<Circle>())
@@ -78,6 +78,7 @@ public class Hole : MonoBehaviour
             //If it's directly over it (Factoring in leniency)
             if (Mathf.Abs(PosDiffX) <= 0.25 && Mathf.Abs(PosDiffY) <= 0.25)
             {
+                circleController.overCircle = true;
                 //Start timer for auto-drop
                 StartCoroutine(AutoDropTimer(thisCircle));
                 //float absRadDiff = Mathf.Abs(RadDiff);
@@ -88,42 +89,46 @@ public class Hole : MonoBehaviour
                     if (negRadDiff <= circleController.highAccurateVal)
                     {
                         circleController.ChangeColour(CircleController.Colour.Green);
-                        scoreToAdd = 2;
+                        scoreToAdd = 5;
                     }
 
                     else if (negRadDiff >= circleController.highAccurateVal && negRadDiff < circleController.lowAccurateVal)
                     {
                         circleController.ChangeColour(CircleController.Colour.Yellow);
-                        scoreToAdd = 1;
+                        scoreToAdd = 3;
                     }
                     else if (negRadDiff >= circleController.lowAccurateVal)
                     {
                         circleController.ChangeColour(CircleController.Colour.Red);
-                        scoreToAdd = -6;
+                        scoreToAdd = -5;
                     }
                 }
                 else
                 {
                     //If the circle is too big, always be red
                     circleController.ChangeColour(CircleController.Colour.Red);
-                    scoreToAdd = -5;
+                    scoreToAdd = -3;
                 }
                 if (!circleController.holding || dropNow)
                 {
                     //Tell controller to spawn a new circle and hole
                     Handheld.Vibrate();
-
+                    if (dropNow)
+                    {
+                        scoreToAdd -= 2;
+                    }
                     circleController.AddScore(scoreToAdd);
-                    gameObject.SetActive(false);
-                    circleController.overCircle = false;
-                    thisCircle.timerImg.enabled = false;
-                    circleController.ResetColour();
-                    circleController.ResetCirclePosAndColour();
-                    Destroy(gameObject);
+                    circleController.DestroyThisHole(this);
                 }
+            }
+            else
+            {
+                circleController.overCircle = false;
             }
          }
     }
+
+   
        
 }
 
