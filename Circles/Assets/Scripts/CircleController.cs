@@ -7,20 +7,19 @@ public class CircleController : MonoBehaviour
 {
     //Circles in current scene
     List <Circle> circles = new List<Circle>();
-    GameObject currSelection;
+    GameObject currCircle;
     public Circle circlePrefab;
     public Hole holePrefab;
 
     private float initialDistance;
     private Vector3 initialScale;
 
-    float radMax = 3.4f;
-    float radMin = 0.8f;
+    float radMax = 0.55f;
+    float radMin = 0.3f;
 
     public bool holding;
     public bool overCircle;
     public int holesToSpawn;
-    public int holesInScene;
     int currLvl;
     float xPos = 0, yPos = 0, rad = 0;
     int currScore;
@@ -28,26 +27,33 @@ public class CircleController : MonoBehaviour
 
     public GameObject circleSpawnPoint;
 
+    public GameObject gameOverScreen;
+
     //Time between each circle spawn
     public float waitTimer = 10f;
 
     bool dragging;
 
     //Values for each accuracy level:
-    public float redVal = 1f;
-    public float yellowVal = 0.75f;
-    public float greenVal = 0.2f;
+    public float lowAccurateVal;
+    public float highAccurateVal;
 
     public enum Colour { Red, Yellow, Green };
+
+    public Color customGreen = new Color32(163/255, 240/255, 171/255, 94/255);
+    public Color customRed = new Color32(224/255,132/255,122/255,88/255);
+    public Color customYellow = new Color32(247/255,243/255,171/255,97/255);
     
+    List<Hole> holesInScene = new List<Hole>();
+
 
     // Start is called before the first frame update
     void Start()
     {
         SpawnNewCircle();
-
+        //Spawn first hole
+        SpawnNewHole();
         StartCoroutine(NewHoleTimer());
-        
     }
 
     public void AddScore(int amount)
@@ -60,23 +66,34 @@ public class CircleController : MonoBehaviour
     {
         if(col== Colour.Red)
         {
-            currSelection.GetComponent<SpriteRenderer>().color = Color.red;
+            currCircle.GetComponent<SpriteRenderer>().color = Color.red;
         }
         else if(col == Colour.Yellow)
         {
-            currSelection.GetComponent<SpriteRenderer>().color = Color.yellow;
+            currCircle.GetComponent<SpriteRenderer>().color = Color.yellow;
 
         }
         else if(col == Colour.Green)
         {
-            currSelection.GetComponent<SpriteRenderer>().color = Color.green;
+            currCircle.GetComponent<SpriteRenderer>().color = Color.green;
         }
     }
 
     public void ResetColour()
     {
-        currSelection.GetComponent<SpriteRenderer>().color = Color.white;
+        currCircle.GetComponent<SpriteRenderer>().color = Color.white;
 
+    }
+
+    public void DeleteAllHoles()
+    {
+        for(int i = 0; i < holesInScene.Count; i++)
+        {
+            //lesInScene[i].gameObject.SetActive(false);
+            DestroyImmediate(holesInScene[i].gameObject);
+            
+        }
+        holesInScene.Clear();
     }
 
     public void SpawnNewCircle()
@@ -89,27 +106,33 @@ public class CircleController : MonoBehaviour
         //thisCircle.radius = rad;
 
         Circle thisCircle = Instantiate(circlePrefab, circleSpawnPoint.transform.position, Quaternion.identity);
-        thisCircle.radius = 1.4f;
-        
+        thisCircle.radius = 0.5f;
+        currCircle = thisCircle.gameObject;
     }
 
     IEnumerator NewHoleTimer()
     {
         while (true)
         {
-            if(holesInScene < holesToSpawn)
+            if(holesInScene.Count < holesToSpawn)
             {
                 yield return new WaitForSeconds(waitTimer);
                 SpawnNewHole();
-                holesInScene++;
             }
             else
             {
-                yield return null;
+                //yield return null;
+                EndGame();
+                break;
             }
          
         }
         
+    }
+
+    void EndGame()
+    {
+        gameOverScreen.SetActive(true);
     }
 
     void SpawnNewHole()
@@ -119,6 +142,7 @@ public class CircleController : MonoBehaviour
         Hole thisHole =
         Instantiate(holePrefab, new Vector2(xPos, yPos), Quaternion.identity);
         thisHole.radius = rad;
+        holesInScene.Add(thisHole);
     }
 
     Vector2 RandDistribute(ref float xPos, ref float yPos, ref float rad)
@@ -136,28 +160,47 @@ public class CircleController : MonoBehaviour
         return potentialPos;
     }
     
+    public void RestartGame()
+    {
+        //Disable game over screen, reset score, delete holes
+        gameOverScreen.SetActive(false);
+        currScore = 0;
+        DeleteAllHoles();
+        StartCoroutine(NewHoleTimer());
+        ResetCirclePosAndColour();
+       
+
+        //Just to be safe
+        holding = false;
+        overCircle = false;
+    }
+
+    public void ResetCirclePosAndColour()
+    {
+        
+            currCircle.transform.position = circleSpawnPoint.transform.position;
+            currCircle.GetComponent<Circle>().timerImg.enabled = false;
+            ResetColour();
+        
+    }
 
     // Update is called once per frame
     void Update()
     {
         currScoreTxt.text = currScore.ToString();
 
+        if(currScore < 0)
+        {
+            EndGame();
+        }
 
-        if (Input.touchCount == 0 && currSelection != null)
+        if (Input.touchCount == 0)
         {
             holding = false;
             if (!overCircle)
             {
-                currSelection.transform.position = circleSpawnPoint.transform.position;
+                ResetCirclePosAndColour();
             }
-
-
-
-            //if (currSelection != null)
-            //{
-            //    currSelection.GetComponent<Rigidbody>().isKinematic = false;
-            //}
-            //currSelection = null;
         }
 
         else if (Input.touchCount > 0)
@@ -167,11 +210,6 @@ public class CircleController : MonoBehaviour
 
             if (Physics.Raycast(ray, out hit, Mathf.Infinity))
             {
-                //If we hit a circle
-                if (hit.collider.gameObject.GetComponent<Circle>())
-                {
-                    currSelection = hit.collider.gameObject;
-                 
                     if(Input.touchCount >=1)
                     {
                         holding = true;
@@ -184,7 +222,7 @@ public class CircleController : MonoBehaviour
                             if (touchZero.phase == TouchPhase.Began || touchOne.phase == TouchPhase.Began)
                             {
                                 initialDistance = Vector2.Distance(touchZero.position, touchOne.position);
-                                initialScale = currSelection.transform.localScale;
+                                initialScale = currCircle.transform.localScale;
                             }
                             else
                             {
@@ -194,21 +232,20 @@ public class CircleController : MonoBehaviour
 
                                 if ((initialScale.x * factor) < radMax || (initialScale.x * factor) > radMin)
                                 {
-                                    currSelection.transform.localScale = initialScale * factor;
+                                    currCircle.transform.localScale = initialScale * factor;
                                 }
                             }
                         }
                     }
-                }
-             }
+            }
         }
 
         if (holding)
         {
             Vector2 currPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
 
-            //currSelection.GetComponent<Rigidbody>().isKinematic = true;
-            currSelection.transform.position = new Vector2(currPos.x, currPos.y);
+            //currCircle.GetComponent<Rigidbody>().isKinematic = true;
+            currCircle.transform.position = new Vector2(currPos.x, currPos.y);
         }
     }
 }
