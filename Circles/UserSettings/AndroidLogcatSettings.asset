@@ -2,8 +2,8 @@
     "m_SelectedDeviceId": "R5CR90CZEVD",
     "m_SelectedPackage": {
         "deviceId": "R5CR90CZEVD",
-        "name": "com.DefaultCompany.com.unity.template.mobile2D",
-        "processId": 1097,
+        "name": "com.TripHazard.Circles",
+        "processId": 2929,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -372,6 +372,30 @@
             "deviceId": "R5CR90CZEVD",
             "name": "com.DefaultCompany.com.unity.template.mobile2D",
             "processId": 1097,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR90CZEVD",
+            "name": "com.TripHazard.Circles",
+            "processId": 14817,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR90CZEVD",
+            "name": "com.TripHazard.Circles",
+            "processId": 10035,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR90CZEVD",
+            "name": "com.TripHazard.Circles",
+            "processId": 11146,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR90CZEVD",
+            "name": "com.TripHazard.Circles",
+            "processId": 2929,
             "exited": false
         }
     ],

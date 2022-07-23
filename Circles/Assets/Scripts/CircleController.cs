@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using GooglePlayGames;
+using GooglePlayGames.BasicApi;
 
 public class CircleController : MonoBehaviour
 {
@@ -30,11 +32,13 @@ public class CircleController : MonoBehaviour
     public GameObject circleSpawnPoint;
 
     public GameObject gameOverScreen;
+    public GameObject pauseScreen;
 
     //Time between each circle spawn
     public float waitTimer;
 
     bool dragging;
+    bool circleSpawnerRunning;
 
     //Values for each accuracy level:
     public float lowAccurateVal;
@@ -48,10 +52,12 @@ public class CircleController : MonoBehaviour
     
     List<Hole> holesInScene = new List<Hole>();
 
+    PlayServicesManager thisPlayServices;
 
     // Start is called before the first frame update
     void Start()
     {
+        thisPlayServices = FindObjectOfType<PlayServicesManager>();
         SpawnNewCircle();
         //Spawn first hole
         SpawnNewHole();
@@ -117,10 +123,14 @@ public class CircleController : MonoBehaviour
     {
         while (true)
         {
+            circleSpawnerRunning = true;
             if(holesInScene.Count < holesToSpawn)
             {
-                yield return new WaitForSeconds(waitTimer);
-                SpawnNewHole();
+                
+                    yield return new WaitForSeconds(waitTimer);
+                    SpawnNewHole();
+                
+               
             }
             else
             {
@@ -153,7 +163,13 @@ public class CircleController : MonoBehaviour
 
     void EndGame()
     {
+        
         gameOverScreen.SetActive(true);
+        //Upload score to Google play
+        if (thisPlayServices.connectedToGooglePlay)
+        {
+            Social.ReportScore(currScore, GPGSIds.leaderboard_circlesleaderboard, thisPlayServices.LeaderboardUpdate);
+        }
     }
 
     void SpawnNewHole()
@@ -218,11 +234,15 @@ public class CircleController : MonoBehaviour
     {
         currScoreTxt.text = currScore.ToString();
         currHolesTxt.text = holesInScene.Count.ToString() + "/" + holesToSpawn.ToString();
-        //Only run when game isn't over
-        if (!gameOverScreen.activeInHierarchy) 
+        //Only run when game isn't over/Not paused
+        if (!gameOverScreen.activeInHierarchy && !pauseScreen.activeInHierarchy) 
         {
+            if (!circleSpawnerRunning)
+            {
+                StartCoroutine(NewHoleTimer());
+            }
+            
 
-           
             if (currScore < 0)
             {
                 EndGame();
@@ -239,10 +259,6 @@ public class CircleController : MonoBehaviour
                 {
                     ResetCirclePosAndColour();
                 }
-               
-                
-
-
             }
 
             else if (Input.touchCount > 0 && !dontUpdateCirclePos)
@@ -289,6 +305,11 @@ public class CircleController : MonoBehaviour
                 //currCircle.GetComponent<Rigidbody>().isKinematic = true;
                 currCircle.transform.position = new Vector2(currPos.x, currPos.y);
             }
+        }
+        else
+        {
+            StopAllCoroutines();
+            circleSpawnerRunning = false;
         }
 
         
