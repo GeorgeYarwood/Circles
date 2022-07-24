@@ -16,8 +16,8 @@ public class CircleController : MonoBehaviour
     private float initialDistance;
     private Vector3 initialScale;
 
-    float radMax = 1.6f;
-    float radMin = 0.4f;
+    float radMax = 1.5f;
+    float radMin = 0.5f;
 
     public bool holding;
     public bool overCircle;
@@ -253,87 +253,80 @@ public class CircleController : MonoBehaviour
                 EndGame();
             }
 
-            Touch touch = Input.GetTouch(0);
-
-            // Handle finger movements based on TouchPhase
-            switch (touch.phase)
+            if (Input.touchCount > 0)
             {
-                //When the player first taps the screen
-                case TouchPhase.Began:
-                    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-                    RaycastHit hit;
-                    //If they hit the circle
-                    if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-                    {
-                        //Set holding to true
-                        holding = true;
 
-                    }
-                   
-                    break;
+                Touch touch = Input.GetTouch(0);
 
-                 //When a finger is fragged accross the screen
-                case TouchPhase.Moved:
-                    //Manage pinch to zoo,
-                    if (Input.touchCount > 1)
-                    {
-                        var touchZero = Input.GetTouch(0);
-                        var touchOne = Input.GetTouch(1);
-
-                        if (touchZero.phase == TouchPhase.Began || touchOne.phase == TouchPhase.Began)
+                // Handle finger movements based on TouchPhase
+                switch (touch.phase)
+                {
+                    //When the player first taps the screen
+                    case TouchPhase.Began:
+                        Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+                        RaycastHit hit;
+                        //If they hit the circle
+                        if (Physics.Raycast(ray, out hit, Mathf.Infinity))
                         {
-                            initialDistance = Vector2.Distance(touchZero.position, touchOne.position);
-                            initialScale = currCircle.transform.localScale;
+                            //Set holding to true
+                            holding = true;
+
                         }
-                        else
+
+                        break;
+
+                    //When a finger is fragged accross the screen
+                    case TouchPhase.Moved:
+
+                        //Update circle position to finger position
+                        if (holding && !dontUpdateCirclePos)
                         {
-                            var currentDistance = Vector2.Distance(touchZero.position, touchOne.position);
+                            Vector2 currPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
 
-                            var factor = currentDistance / initialDistance;
+                            //currCircle.GetComponent<Rigidbody>().isKinematic = true;
+                            currCircle.transform.position = new Vector2(currPos.x, currPos.y);
+                        }
+                        break;
 
-                            if ((initialScale.x * factor) < radMax || (initialScale.x * factor) > radMin)
+                    //When player lifts finger from screen
+                    case TouchPhase.Ended:
+                        holding = false;
+                        //Reset pos if not over a circle waiting to be dropped
+                        if (!overCircle)
+                        {
+                            ResetCirclePosAndColour();
+                            if (dontUpdateCirclePos)
                             {
-                                currCircle.transform.localScale = initialScale * factor;
+                                dontUpdateCirclePos = false;
                             }
+
                         }
-                    }
-                    //Update circle position to finger position
-                    if (holding && !dontUpdateCirclePos)
-                    {
-                        Vector2 currPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+                        break;
+                }
+                //Manage pinch to zoom
+                if (Input.touchCount > 1 && holding)
+                {
+                    var touchZero = Input.GetTouch(0);
+                    var touchOne = Input.GetTouch(1);
 
-                        //currCircle.GetComponent<Rigidbody>().isKinematic = true;
-                        currCircle.transform.position = new Vector2(currPos.x, currPos.y);
-                    }
-                    break;
-
-                //When player lifts finger from screen
-                case TouchPhase.Ended:
-                    holding = false;
-                    //Reset pos if not over a circle waiting to be dropped
-                    if (!overCircle)
+                    if (touchZero.phase == TouchPhase.Began || touchOne.phase == TouchPhase.Began)
                     {
-                        ResetCirclePosAndColour();
-                        if (dontUpdateCirclePos)
+                        initialDistance = Vector2.Distance(touchZero.position, touchOne.position);
+                        initialScale = currCircle.transform.localScale;
+                    }
+                    else
+                    {
+                        var currentDistance = Vector2.Distance(touchZero.position, touchOne.position);
+
+                        var factor = currentDistance / initialDistance;
+
+                        if ((initialScale.x * factor) < radMax || (initialScale.x * factor) > radMin)
                         {
-                            dontUpdateCirclePos = false;
+                            currCircle.transform.localScale = initialScale * factor;
                         }
-
                     }
-                    break;
-
-
-
-
-
-
+                }
             }
-
-            if (Input.touchCount > 0 && !dontUpdateCirclePos)
-            {
-                
-            }
-
             
         }
         else
