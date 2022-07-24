@@ -46,11 +46,12 @@ public class Hole : MonoBehaviour
         Circle thisCircle;
         if (thisCircle = collision.gameObject.GetComponent<Circle>())
         {
-            remainingTime = autoDropTimer;
+            
             circleController.ResetColour();
             circleController.overCircle = false;
             thisCircle.timerImg.enabled = false;
             StopAllCoroutines();
+            remainingTime = autoDropTimer;
         }
 
        

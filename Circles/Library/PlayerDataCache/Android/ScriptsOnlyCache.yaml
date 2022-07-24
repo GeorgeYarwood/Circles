@@ -21,6 +21,7 @@ ScriptsOnlyBuild:
     - UnityEditor.Tilemaps.TileDragAndDropManager
     - UnityEditor.Tilemaps.TilemapPrefabStageHelper
     Unity.Mobile.AndroidLogcat.Editor.dll:
+    - Unity.Android.Logcat.AndroidLogcatConsoleWindow
     - Unity.Android.Logcat.AndroidLogcatManager
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
@@ -84,6 +85,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 5664}
     - Class: 114
       Script: {instanceID: 5958}
+    - Class: 114
+      Script: {instanceID: 42382}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -646,7 +649,7 @@ ScriptsOnlyBuild:
     className: TMP_ScrollbarEventHandler
   - hash:
       serializedVersion: 2
-      Hash: eea8e4cd4c13a7280a34093e494a7ee1
+      Hash: 92cfe340e8bcd24348ae35eb063fb1b4
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CircleController
@@ -726,4 +729,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/mainMenu.unity
   - Assets/Scenes/mainGame.unity
-  playerPath: C:/Users/georg/Desktop/version2.5.aab
+  playerPath: C:/Users/georg/Desktop/version4.aab

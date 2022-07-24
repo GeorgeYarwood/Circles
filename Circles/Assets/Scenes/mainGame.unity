@@ -922,8 +922,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3c33f488694da246b6f4853cc21e887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  circlePrefab: {fileID: 7505489030308368971, guid: 61dfa66d0cb0b874cba5212236ab9765, type: 3}
-  holePrefab: {fileID: 1923362445373620493, guid: c9e7940261dd93a4a957d6b46bc93de7, type: 3}
+  circlePrefab: {fileID: 2056611579337275542, guid: 93ba5002337f341479c884313ad19389, type: 3}
+  holePrefab: {fileID: 8947527827750799211, guid: 43a424c83acff2143b021a9be439847e, type: 3}
   holding: 0
   overCircle: 0
   holesToSpawn: 8
@@ -934,8 +934,8 @@ MonoBehaviour:
   gameOverScreen: {fileID: 753168643}
   pauseScreen: {fileID: 1795255878}
   waitTimer: 1.5
-  lowAccurateVal: 0.15
-  highAccurateVal: 0.05
+  lowAccurateVal: 0.3
+  highAccurateVal: 0.15
   customGreen: {r: 163, g: 240, b: 171, a: 94}
   customRed: {r: 163, g: 240, b: 171, a: 94}
   customYellow: {r: 247, g: 243, b: 171, a: 97}
@@ -986,10 +986,10 @@ RectTransform:
   m_Father: {fileID: 1214008937}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -602, y: -1148}
-  m_SizeDelta: {x: 155.8151, y: 156.4891}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 118, y: 332}
+  m_SizeDelta: {x: 155.81506, y: 156.48914}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1162640271
 MonoBehaviour:

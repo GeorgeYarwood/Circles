@@ -16,8 +16,8 @@ public class CircleController : MonoBehaviour
     private float initialDistance;
     private Vector3 initialScale;
 
-    float radMax = 0.45f;
-    float radMin = 0.3f;
+    float radMax = 1.6f;
+    float radMin = 0.4f;
 
     public bool holding;
     public bool overCircle;
@@ -74,16 +74,16 @@ public class CircleController : MonoBehaviour
     {
         if(col== Colour.Red)
         {
-            currCircle.GetComponent<SpriteRenderer>().color = Color.red;
+            currCircle.GetComponentInChildren<Image>().color = Color.red;
         }
         else if(col == Colour.Yellow)
         {
-            currCircle.GetComponent<SpriteRenderer>().color = Color.yellow;
+            currCircle.GetComponentInChildren<Image>().color = Color.yellow;
 
         }
         else if(col == Colour.Green)
         {
-            currCircle.GetComponent<SpriteRenderer>().color = Color.green;
+            currCircle.GetComponentInChildren<Image>().color = Color.green;
         }
     }
 
@@ -115,7 +115,7 @@ public class CircleController : MonoBehaviour
         //thisCircle.radius = rad;
 
         Circle thisCircle = Instantiate(circlePrefab, circleSpawnPoint.transform.position, Quaternion.identity);
-        thisCircle.radius = 0.45f;
+        thisCircle.radius = 1f;
         currCircle = thisCircle.gameObject;
     }
 
@@ -153,11 +153,13 @@ public class CircleController : MonoBehaviour
                 holesInScene.RemoveAt(i);
             }
         }
-        overCircle = false;
-        holding = false;
+
+
         //StartCoroutine(WaitToUpdateCirclePos());
+        holding = false;
         ResetCirclePosAndColour();
-        dontUpdateCirclePos = true;
+        overCircle = false;
+        //dontUpdateCirclePos = true;
 
     }
 
@@ -217,8 +219,11 @@ public class CircleController : MonoBehaviour
     {
         
             currCircle.transform.position = circleSpawnPoint.transform.position;
+        
             currCircle.GetComponent<Circle>().timerImg.enabled = false;
-            ResetColour();
+        //Hard code just for proof of concept
+            currCircle.transform.localScale = new Vector3(1, 1, 0);
+        ResetColour();
         
     }
 
@@ -230,7 +235,7 @@ public class CircleController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         currScoreTxt.text = currScore.ToString();
         currHolesTxt.text = holesInScene.Count.ToString() + "/" + holesToSpawn.ToString();
@@ -248,63 +253,88 @@ public class CircleController : MonoBehaviour
                 EndGame();
             }
 
-            if (Input.touchCount == 0)
-            {
-                holding = false;
-                if (dontUpdateCirclePos)
-                {
-                    dontUpdateCirclePos = false;
-                }
-                if (!overCircle)
-                {
-                    ResetCirclePosAndColour();
-                }
-            }
+            Touch touch = Input.GetTouch(0);
 
-            else if (Input.touchCount > 0 && !dontUpdateCirclePos)
+            // Handle finger movements based on TouchPhase
+            switch (touch.phase)
             {
-                Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-                RaycastHit hit;
-
-                if (Physics.Raycast(ray, out hit, Mathf.Infinity))
-                {
-                    if (Input.touchCount >= 1)
+                //When the player first taps the screen
+                case TouchPhase.Began:
+                    Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+                    RaycastHit hit;
+                    //If they hit the circle
+                    if (Physics.Raycast(ray, out hit, Mathf.Infinity))
                     {
+                        //Set holding to true
                         holding = true;
 
-                        if (Input.touchCount > 1)
+                    }
+                   
+                    break;
+
+                 //When a finger is fragged accross the screen
+                case TouchPhase.Moved:
+                    //Manage pinch to zoo,
+                    if (Input.touchCount > 1)
+                    {
+                        var touchZero = Input.GetTouch(0);
+                        var touchOne = Input.GetTouch(1);
+
+                        if (touchZero.phase == TouchPhase.Began || touchOne.phase == TouchPhase.Began)
                         {
-                            var touchZero = Input.GetTouch(0);
-                            var touchOne = Input.GetTouch(1);
+                            initialDistance = Vector2.Distance(touchZero.position, touchOne.position);
+                            initialScale = currCircle.transform.localScale;
+                        }
+                        else
+                        {
+                            var currentDistance = Vector2.Distance(touchZero.position, touchOne.position);
 
-                            if (touchZero.phase == TouchPhase.Began || touchOne.phase == TouchPhase.Began)
+                            var factor = currentDistance / initialDistance;
+
+                            if ((initialScale.x * factor) < radMax || (initialScale.x * factor) > radMin)
                             {
-                                initialDistance = Vector2.Distance(touchZero.position, touchOne.position);
-                                initialScale = currCircle.transform.localScale;
-                            }
-                            else
-                            {
-                                var currentDistance = Vector2.Distance(touchZero.position, touchOne.position);
-
-                                var factor = currentDistance / initialDistance;
-
-                                if ((initialScale.x * factor) < radMax || (initialScale.x * factor) > radMin)
-                                {
-                                    currCircle.transform.localScale = initialScale * factor;
-                                }
+                                currCircle.transform.localScale = initialScale * factor;
                             }
                         }
                     }
-                }
+                    //Update circle position to finger position
+                    if (holding && !dontUpdateCirclePos)
+                    {
+                        Vector2 currPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
+
+                        //currCircle.GetComponent<Rigidbody>().isKinematic = true;
+                        currCircle.transform.position = new Vector2(currPos.x, currPos.y);
+                    }
+                    break;
+
+                //When player lifts finger from screen
+                case TouchPhase.Ended:
+                    holding = false;
+                    //Reset pos if not over a circle waiting to be dropped
+                    if (!overCircle)
+                    {
+                        ResetCirclePosAndColour();
+                        if (dontUpdateCirclePos)
+                        {
+                            dontUpdateCirclePos = false;
+                        }
+
+                    }
+                    break;
+
+
+
+
+
+
             }
 
-            if (holding && !dontUpdateCirclePos)
+            if (Input.touchCount > 0 && !dontUpdateCirclePos)
             {
-                Vector2 currPos = Camera.main.ScreenToWorldPoint(Input.GetTouch(0).position);
-
-                //currCircle.GetComponent<Rigidbody>().isKinematic = true;
-                currCircle.transform.position = new Vector2(currPos.x, currPos.y);
+                
             }
+
+            
         }
         else
         {
