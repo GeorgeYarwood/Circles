@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "R5CR90CZEVD",
         "name": "com.TripHazard.Circles",
-        "processId": 14710,
+        "processId": 3561,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -132,6 +132,78 @@
             "deviceId": "R5CR90CZEVD",
             "name": "com.TripHazard.Circles",
             "processId": 14710,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR90CZEVD",
+            "name": "com.TripHazard.Circles",
+            "processId": 18837,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR90CZEVD",
+            "name": "com.TripHazard.Circles",
+            "processId": 21655,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR90CZEVD",
+            "name": "com.TripHazard.Circles",
+            "processId": 23332,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR90CZEVD",
+            "name": "com.TripHazard.Circles",
+            "processId": 25007,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR90CZEVD",
+            "name": "com.TripHazard.Circles",
+            "processId": 26700,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR90CZEVD",
+            "name": "com.TripHazard.Circles",
+            "processId": 27599,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR90CZEVD",
+            "name": "com.TripHazard.Circles",
+            "processId": 28027,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR90CZEVD",
+            "name": "com.TripHazard.Circles",
+            "processId": 30617,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR90CZEVD",
+            "name": "com.TripHazard.Circles",
+            "processId": 31778,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR90CZEVD",
+            "name": "com.TripHazard.Circles",
+            "processId": 32570,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR90CZEVD",
+            "name": "com.TripHazard.Circles",
+            "processId": 1641,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR90CZEVD",
+            "name": "com.TripHazard.Circles",
+            "processId": 3561,
             "exited": false
         }
     ],

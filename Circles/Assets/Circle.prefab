@@ -34,7 +34,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.79945374, y: 2.175354}
+  m_AnchoredPosition: {x: 0.9, y: 2.175354}
   m_SizeDelta: {x: 194, y: 193.99998}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3316200563807286056
@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.69803923, g: 0.69803923, b: 0.69803923, a: 0.30588236}
+  m_Color: {r: 0.14179921, g: 1, b: 0, a: 0.30588236}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -70,7 +70,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 4
-  m_FillAmount: 1
+  m_FillAmount: 0.8
   m_FillClockwise: 0
   m_FillOrigin: 2
   m_UseSpriteMesh: 0
@@ -86,8 +86,8 @@ GameObject:
   - component: {fileID: 2056611579337275528}
   - component: {fileID: 2056611579337275529}
   - component: {fileID: 2056611579337275542}
-  - component: {fileID: -8398864655363447049}
   - component: {fileID: 5526348362252424212}
+  - component: {fileID: -8398864655363447049}
   m_Layer: 3
   m_Name: Circle
   m_TagString: Untagged
@@ -175,6 +175,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   radius: 0
   timerImg: {fileID: 6881495421828004720}
+--- !u!135 &5526348362252424212
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2056611579337275540}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.97
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!54 &-8398864655363447049
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -191,19 +204,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!135 &5526348362252424212
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2056611579337275540}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.97
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &3330041728650827318
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,6 +13,7 @@ public class Hole : MonoBehaviour
     float autoDropTimer = 50f;
     float remainingTime;
 
+
     void Start()
     {
         gameObject.transform.localScale = new Vector3(radius, radius, 0);
@@ -113,7 +114,10 @@ public class Hole : MonoBehaviour
                 if (!circleController.holding || dropNow)
                 {
                     //Tell controller to spawn a new circle and hole
-                    Handheld.Vibrate();
+                    if(PlayerPrefs.GetInt("VibrationKey") == 1 ? true : false){
+                        Handheld.Vibrate();
+                    }
+                    
                     if (dropNow)
                     {
                         scoreToAdd -= 2;

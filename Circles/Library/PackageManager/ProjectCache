@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637913641880087100
-    m_Hash: 257788653
+      ticks: 637942647999384648
+    m_Hash: 2844645941
   m_LockFileStatus:
     m_FilePath: C:/Users/georg/Documents/Circles/Circles/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637913642075727142
-    m_Hash: 3402760274
+      ticks: 637942647999479648
+    m_Hash: 3072177992
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -1803,6 +1803,167 @@ m_PackageAssets:
         url: 
         revision: 
         path: 
+    - packageId: com.unity.vectorgraphics@2.0.0-preview.19
+      testable: 0
+      isDirectDependency: 1
+      version: 2.0.0-preview.19
+      source: 1
+      resolvedPath: C:\Users\georg\Documents\Circles\Circles\Library\PackageCache\com.unity.vectorgraphics@2.0.0-preview.19
+      assetPath: Packages/com.unity.vectorgraphics
+      name: com.unity.vectorgraphics
+      displayName: Vector Graphics
+      author:
+        name: 
+        email: 
+        url: 
+      category: 
+      type: 
+      description: The vector graphics package provides an SVG importer and runtime
+        vector graphics APIs.
+      status: 4
+      errors: []
+      versions:
+        all:
+        - 1.0.0-preview.13
+        - 1.0.0-preview.15
+        - 1.0.0-preview.19
+        - 1.0.0-preview.20
+        - 1.0.0-preview.21
+        - 1.0.0-preview.22
+        - 1.0.0-preview.23
+        - 1.0.0-preview.24
+        - 1.0.0-preview.26
+        - 1.0.0-preview.27
+        - 1.0.0-preview.28
+        - 1.0.0-preview.29
+        - 1.0.0-preview.30
+        - 1.0.0-preview.31
+        - 1.0.0-preview.32
+        - 1.0.0-preview.33
+        - 1.0.0-preview.34
+        - 2.0.0-preview.2
+        - 2.0.0-preview.3
+        - 2.0.0-preview.4
+        - 2.0.0-preview.5
+        - 2.0.0-preview.6
+        - 2.0.0-preview.7
+        - 2.0.0-preview.8
+        - 2.0.0-preview.9
+        - 2.0.0-preview.10
+        - 2.0.0-preview.11
+        - 2.0.0-preview.12
+        - 2.0.0-preview.13
+        - 2.0.0-preview.14
+        - 2.0.0-preview.15
+        - 2.0.0-preview.16
+        - 2.0.0-preview.17
+        - 2.0.0-preview.18
+        - 2.0.0-preview.19
+        compatible:
+        - 2.0.0-preview.2
+        - 2.0.0-preview.3
+        - 2.0.0-preview.4
+        - 2.0.0-preview.5
+        - 2.0.0-preview.6
+        - 2.0.0-preview.7
+        - 2.0.0-preview.8
+        - 2.0.0-preview.9
+        - 2.0.0-preview.10
+        - 2.0.0-preview.11
+        - 2.0.0-preview.12
+        - 2.0.0-preview.13
+        - 2.0.0-preview.14
+        - 2.0.0-preview.15
+        - 2.0.0-preview.16
+        - 2.0.0-preview.17
+        - 2.0.0-preview.18
+        - 2.0.0-preview.19
+        verified: 2.0.0-preview.19
+      dependencies:
+      - name: com.unity.2d.sprite
+        version: 1.0.0
+      - name: com.unity.ugui
+        version: 1.0.0
+      - name: com.unity.modules.animation
+        version: 1.0.0
+      - name: com.unity.modules.imageconversion
+        version: 1.0.0
+      - name: com.unity.modules.physics
+        version: 1.0.0
+      - name: com.unity.modules.physics2d
+        version: 1.0.0
+      - name: com.unity.modules.ui
+        version: 1.0.0
+      - name: com.unity.modules.uielements
+        version: 1.0.0
+      - name: com.unity.modules.unitywebrequest
+        version: 1.0.0
+      - name: com.unity.modules.unitywebrequesttexture
+        version: 1.0.0
+      - name: com.unity.modules.unitywebrequestwww
+        version: 1.0.0
+      resolvedDependencies:
+      - name: com.unity.2d.sprite
+        version: 1.0.0
+      - name: com.unity.ugui
+        version: 1.0.0
+      - name: com.unity.modules.ui
+        version: 1.0.0
+      - name: com.unity.modules.imgui
+        version: 1.0.0
+      - name: com.unity.modules.animation
+        version: 1.0.0
+      - name: com.unity.modules.imageconversion
+        version: 1.0.0
+      - name: com.unity.modules.physics
+        version: 1.0.0
+      - name: com.unity.modules.physics2d
+        version: 1.0.0
+      - name: com.unity.modules.uielements
+        version: 1.0.0
+      - name: com.unity.modules.jsonserialize
+        version: 1.0.0
+      - name: com.unity.modules.uielementsnative
+        version: 1.0.0
+      - name: com.unity.modules.unitywebrequest
+        version: 1.0.0
+      - name: com.unity.modules.unitywebrequesttexture
+        version: 1.0.0
+      - name: com.unity.modules.unitywebrequestwww
+        version: 1.0.0
+      - name: com.unity.modules.unitywebrequestassetbundle
+        version: 1.0.0
+      - name: com.unity.modules.assetbundle
+        version: 1.0.0
+      - name: com.unity.modules.unitywebrequestaudio
+        version: 1.0.0
+      - name: com.unity.modules.audio
+        version: 1.0.0
+      keywords:
+      - vector
+      - graphics
+      - svg
+      - importer
+      registry:
+        id: main
+        name: 
+        url: https://packages.unity.com
+        scopes: []
+        isDefault: 1
+        capabilities: 7
+      hasRegistry: 1
+      hideInEditor: 1
+      entitlements:
+        isAllowed: 1
+      isAssetStorePackage: 0
+      datePublishedTicks: 637860858860000000
+      documentationUrl: 
+      hasRepository: 1
+      repository:
+        type: git
+        url: https://github.cds.internal.unity3d.com/unity/com.unity.vectorgraphics.git
+        revision: 6bc60bb08ff401a6569ee85ab6f75abf368b740b
+        path: 
     - packageId: com.unity.modules.ai@1.0.0
       testable: 0
       isDirectDependency: 1
@@ -3573,6 +3734,7 @@ m_PackageAssets:
         - 1.0.5
         - 1.0.6
         - 2.0.2
+        - 2.0.3
         compatible:
         - 0.1.5-preview
         - 0.1.6-preview
@@ -3581,6 +3743,7 @@ m_PackageAssets:
         - 1.0.5
         - 1.0.6
         - 2.0.2
+        - 2.0.3
         verified: 1.0.6
       dependencies: []
       resolvedDependencies: []
@@ -3645,6 +3808,7 @@ m_PackageAssets:
         - 1.3.2
         - 1.4.0
         - 1.4.1
+        - 1.4.2
         compatible:
         - 1.0.1
         - 1.1.0-pre.7
@@ -3659,6 +3823,7 @@ m_PackageAssets:
         - 1.3.2
         - 1.4.0
         - 1.4.1
+        - 1.4.2
         verified: 1.0.1
       dependencies:
       - name: com.unity.modules.unitywebrequest
@@ -3799,17 +3964,35 @@ m_PackageAssets:
         - 2.0.1
         - 2.0.2
         - 2.1.0
+        - 2.1.1
+        - 2.1.2
         - 3.0.0
         - 3.0.1
         - 4.0.0
         - 4.0.1
         - 4.0.2
         - 4.0.3
+        - 4.0.4
         - 4.1.0
+        - 4.2.0
         - 5.0.0-pre.1
         - 5.0.0-pre.2
+        - 5.0.0
+        - 6.0.0-pre.2
+        - 6.0.0-pre.3
+        - 6.0.0-pre.4
+        - 6.0.0
+        - 6.0.1
+        - 6.0.2
+        - 6.0.3
+        - 7.0.0-pre.3
+        - 7.0.0-pre.4
+        - 7.0.0
+        - 8.0.0-pre.1
+        - 8.0.0-pre.2
         compatible:
         - 4.1.0
+        - 4.2.0
         verified: 4.1.0
       dependencies:
       - name: com.unity.2d.sprite
@@ -3843,7 +4026,7 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 0
+      datePublishedTicks: 637781310790000000
       documentationUrl: 
       hasRepository: 1
       repository:
@@ -3881,6 +4064,7 @@ m_PackageAssets:
         - 2.0.5
         - 2.0.6
         - 2.1.0
+        - 2.1.1
         - 3.0.0
         - 3.0.1
         - 3.0.2
@@ -3889,6 +4073,9 @@ m_PackageAssets:
         - 4.0.2
         - 5.0.0-pre.1
         - 5.0.0-pre.2
+        - 5.0.0
+        - 5.0.1
+        - 5.0.2
         compatible:
         - 4.0.2
         verified: 4.0.2
@@ -3909,7 +4096,7 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 0
+      datePublishedTicks: 637637511040000000
       documentationUrl: 
       hasRepository: 1
       repository:

@@ -16,8 +16,8 @@ public class CircleController : MonoBehaviour
     private float initialDistance;
     private Vector3 initialScale;
 
-    float radMax = 1.5f;
-    float radMin = 0.5f;
+    float radMax = 2.2f;
+    float radMin = 0.8f;
 
     public bool holding;
     public bool overCircle;
@@ -45,7 +45,6 @@ public class CircleController : MonoBehaviour
     public float highAccurateVal;
 
     public enum Colour { Red, Yellow, Green };
-
     public Color customGreen = new Color32(163/255, 240/255, 171/255, 94/255);
     public Color customRed = new Color32(224/255,132/255,122/255,88/255);
     public Color customYellow = new Color32(247/255,243/255,171/255,97/255);
@@ -115,7 +114,7 @@ public class CircleController : MonoBehaviour
         //thisCircle.radius = rad;
 
         Circle thisCircle = Instantiate(circlePrefab, circleSpawnPoint.transform.position, Quaternion.identity);
-        thisCircle.radius = 1f;
+        thisCircle.radius = 2f;
         currCircle = thisCircle.gameObject;
     }
 
@@ -222,7 +221,7 @@ public class CircleController : MonoBehaviour
         
             currCircle.GetComponent<Circle>().timerImg.enabled = false;
         //Hard code just for proof of concept
-            currCircle.transform.localScale = new Vector3(1, 1, 0);
+            currCircle.transform.localScale = new Vector3(2, 2, 0);
         ResetColour();
         
     }
