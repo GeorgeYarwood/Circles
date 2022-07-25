@@ -26,6 +26,8 @@ public class CircleController : MonoBehaviour
     int currLvl;
     float xPos = 0, yPos = 0, rad = 0;
     int currScore;
+    int holesDestroyed;
+    public List<float> pastAccuracy = new List<float>();
     public Text currScoreTxt;
     public Text currHolesTxt;
 
@@ -56,6 +58,7 @@ public class CircleController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        holesDestroyed = 0;
         currScore = baseScore;
         thisPlayServices = FindObjectOfType<PlayServicesManager>();
         SpawnNewCircle();
@@ -154,7 +157,7 @@ public class CircleController : MonoBehaviour
             }
         }
 
-
+        holesDestroyed++;
         //StartCoroutine(WaitToUpdateCirclePos());
         holding = false;
         ResetCirclePosAndColour();
@@ -167,10 +170,19 @@ public class CircleController : MonoBehaviour
     {
 
         gameOverScreen.SetActive(true);
+
+        float add= 0;
+        for(int i = 0; i < pastAccuracy.Count; i++)
+        {
+            add += pastAccuracy[i];
+        }
+        float accAvg = add / pastAccuracy.Count;
         //Upload score to Google play
         if (thisPlayServices.connectedToGooglePlay)
         {
-            Social.ReportScore(currScore, GPGSIds.leaderboard_circlesleaderboard, thisPlayServices.LeaderboardUpdate);
+            Social.ReportScore(currScore, GPGSIds.leaderboard_score, thisPlayServices.LeaderboardUpdate);
+            Social.ReportScore(holesDestroyed, GPGSIds.leaderboard_holes_destroyed, thisPlayServices.LeaderboardUpdate);
+            Social.ReportScore((long)add, GPGSIds.leaderboard_accuracy, thisPlayServices.LeaderboardUpdate);
         }
     }
 
@@ -209,8 +221,8 @@ public class CircleController : MonoBehaviour
         SpawnNewHole();
         StartCoroutine(NewHoleTimer());
         ResetCirclePosAndColour();
-
-
+        holesDestroyed = 0;
+        pastAccuracy.Clear();
         //Just to be safe
         holding = false;
         overCircle = false;
@@ -338,6 +350,11 @@ public class CircleController : MonoBehaviour
                 }
 
             }
+        }
+        else
+        {
+            StopAllCoroutines();
+            circleSpawnerRunning = false;
         }
     }
 }

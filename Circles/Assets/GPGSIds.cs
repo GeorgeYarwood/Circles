@@ -24,7 +24,9 @@
 
 public static class GPGSIds
 {
-        public const string leaderboard_circlesleaderboard = "CgkIjMvW8J8OEAIQAQ"; // <GPGSID>
+        public const string leaderboard_accuracy = "CgkIjMvW8J8OEAIQAg"; // <GPGSID>
+        public const string leaderboard_score = "CgkIjMvW8J8OEAIQAQ"; // <GPGSID>
+        public const string leaderboard_holes_destroyed = "CgkIjMvW8J8OEAIQAw"; // <GPGSID>
 
 }
 

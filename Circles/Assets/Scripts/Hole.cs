@@ -8,16 +8,18 @@ public class Hole : MonoBehaviour
     public float radius;
     int scoreToAdd =0;
     CircleController circleController;
+    SoundController soundController;
     bool dropNow;
 
     float autoDropTimer = 50f;
     float remainingTime;
 
-
+    SoundController.AudioTypes soundToPlay;
     void Start()
     {
         gameObject.transform.localScale = new Vector3(radius, radius, 0);
         circleController = FindObjectOfType<CircleController>();
+        soundController = FindObjectOfType<SoundController>();
     }
 
     IEnumerator AutoDropTimer(Circle thisCircle)
@@ -62,6 +64,7 @@ public class Hole : MonoBehaviour
     void OnTriggerEnter(Collider collision)
     {
         remainingTime = autoDropTimer;
+        soundController.PlaySound(SoundController.AudioTypes.HoverCircle);
     }
     
   
@@ -92,17 +95,22 @@ public class Hole : MonoBehaviour
                     {
                         circleController.ChangeColour(CircleController.Colour.Green);
                         scoreToAdd = 5;
+                        soundToPlay = SoundController.AudioTypes.CircleDropGreen;
                     }
 
                     else if (negRadDiff >= circleController.highAccurateVal && negRadDiff < circleController.lowAccurateVal)
                     {
                         circleController.ChangeColour(CircleController.Colour.Yellow);
                         scoreToAdd = 3;
+                        soundToPlay = SoundController.AudioTypes.CircleDropYellow;
+
                     }
                     else if (negRadDiff >= circleController.lowAccurateVal)
                     {
                         circleController.ChangeColour(CircleController.Colour.Red);
                         scoreToAdd = -5;
+                        soundToPlay = SoundController.AudioTypes.CircleDropRed;
+
                     }
                 }
                 else
@@ -110,6 +118,7 @@ public class Hole : MonoBehaviour
                     //If the circle is too big, always be red
                     circleController.ChangeColour(CircleController.Colour.Red);
                     scoreToAdd = -3;
+                    soundToPlay = SoundController.AudioTypes.CircleDropRed;
                 }
                 if (!circleController.holding || dropNow)
                 {
@@ -122,6 +131,10 @@ public class Hole : MonoBehaviour
                     {
                         scoreToAdd -= 2;
                     }
+
+                    circleController.pastAccuracy.Add(AccuracyCalc(thisCircle.radius, radius));
+                    soundController.PlaySound(soundToPlay);
+
                     circleController.AddScore(scoreToAdd);
                     circleController.DestroyThisHole(this);
                 }
@@ -133,7 +146,11 @@ public class Hole : MonoBehaviour
          }
     }
 
-   
+   float AccuracyCalc(float actualRad, float targetRad)
+    {
+        float errorRate = ((actualRad - targetRad)/actualRad) *100;
+        return (100 - errorRate);
+    }
        
 }
 
