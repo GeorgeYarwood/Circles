@@ -45,8 +45,8 @@ public class SoundController : MonoBehaviour
         }
         else
         {
-            bgSource = sources[0];
-            fxSource = sources[1];
+            bgSource = sources[1];
+            fxSource = sources[0];
         }
 
        

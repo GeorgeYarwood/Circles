@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "R5CR90CZEVD",
         "name": "com.TripHazard.Circles",
-        "processId": 10435,
+        "processId": 11578,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -78,6 +78,12 @@
             "deviceId": "R5CR90CZEVD",
             "name": "com.TripHazard.Circles",
             "processId": 10435,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR90CZEVD",
+            "name": "com.TripHazard.Circles",
+            "processId": 11578,
             "exited": false
         }
     ],

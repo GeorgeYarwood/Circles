@@ -766,4 +766,4 @@ ScriptsOnlyBuild:
   scenePathNames:
   - Assets/Scenes/mainMenu.unity
   - Assets/Scenes/mainGame.unity
-  playerPath: C:/Users/georg/Desktop/version8.aab
+  playerPath: C:/Users/georg/Desktop/version10.aab
