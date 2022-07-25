@@ -8,7 +8,7 @@ using GooglePlayGames.BasicApi;
 public class CircleController : MonoBehaviour
 {
     //Circles in current scene
-    List <Circle> circles = new List<Circle>();
+    List<Circle> circles = new List<Circle>();
     GameObject currCircle;
     public Circle circlePrefab;
     public Hole holePrefab;
@@ -16,8 +16,8 @@ public class CircleController : MonoBehaviour
     private float initialDistance;
     private Vector3 initialScale;
 
-    float radMax = 2.2f;
-    float radMin = 0.8f;
+    float radMax = 2.5f;
+    float radMin = 1.2f;
 
     public bool holding;
     public bool overCircle;
@@ -43,12 +43,12 @@ public class CircleController : MonoBehaviour
     //Values for each accuracy level:
     public float lowAccurateVal;
     public float highAccurateVal;
-
+    public int baseScore;
     public enum Colour { Red, Yellow, Green };
-    public Color customGreen = new Color32(163/255, 240/255, 171/255, 94/255);
-    public Color customRed = new Color32(224/255,132/255,122/255,88/255);
-    public Color customYellow = new Color32(247/255,243/255,171/255,97/255);
-    
+    public Color customGreen;
+    public Color customRed;
+    public Color customYellow;
+
     List<Hole> holesInScene = new List<Hole>();
 
     PlayServicesManager thisPlayServices;
@@ -56,6 +56,7 @@ public class CircleController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        currScore = baseScore;
         thisPlayServices = FindObjectOfType<PlayServicesManager>();
         SpawnNewCircle();
         //Spawn first hole
@@ -65,22 +66,22 @@ public class CircleController : MonoBehaviour
 
     public void AddScore(int amount)
     {
-        currScore+= amount;
+        currScore += amount;
     }
 
-   
+
     public void ChangeColour(Colour col)
     {
-        if(col== Colour.Red)
+        if (col == Colour.Red)
         {
-            currCircle.GetComponentInChildren<Image>().color = Color.red;
+            currCircle.GetComponentInChildren<Image>().color = customRed;
         }
-        else if(col == Colour.Yellow)
+        else if (col == Colour.Yellow)
         {
             currCircle.GetComponentInChildren<Image>().color = Color.yellow;
 
         }
-        else if(col == Colour.Green)
+        else if (col == Colour.Green)
         {
             currCircle.GetComponentInChildren<Image>().color = Color.green;
         }
@@ -94,12 +95,12 @@ public class CircleController : MonoBehaviour
 
     public void DeleteAllHoles()
     {
-        for(int i = 0; i < holesInScene.Count; i++)
+        for (int i = 0; i < holesInScene.Count; i++)
         {
-            if(holesInScene[i] != null)
+            if (holesInScene[i] != null)
             {
                 Destroy(holesInScene[i].gameObject);
-            }           
+            }
         }
         holesInScene.Clear();
     }
@@ -123,13 +124,13 @@ public class CircleController : MonoBehaviour
         while (true)
         {
             circleSpawnerRunning = true;
-            if(holesInScene.Count < holesToSpawn)
+            if (holesInScene.Count < holesToSpawn)
             {
-                
-                    yield return new WaitForSeconds(waitTimer);
-                    SpawnNewHole();
-                
-               
+
+                yield return new WaitForSeconds(waitTimer);
+                SpawnNewHole();
+
+
             }
             else
             {
@@ -137,16 +138,16 @@ public class CircleController : MonoBehaviour
                 EndGame();
                 break;
             }
-         
+
         }
-        
+
     }
 
     public void DestroyThisHole(Hole thisHole)
     {
-        for(int i = 0; i< holesInScene.Count; i++)
+        for (int i = 0; i < holesInScene.Count; i++)
         {
-            if(holesInScene [i] == thisHole)
+            if (holesInScene[i] == thisHole)
             {
                 Destroy(holesInScene[i].gameObject);
                 holesInScene.RemoveAt(i);
@@ -164,7 +165,7 @@ public class CircleController : MonoBehaviour
 
     void EndGame()
     {
-        
+
         gameOverScreen.SetActive(true);
         //Upload score to Google play
         if (thisPlayServices.connectedToGooglePlay)
@@ -175,7 +176,7 @@ public class CircleController : MonoBehaviour
 
     void SpawnNewHole()
     {
-        RandDistribute(ref xPos, ref yPos, ref rad);
+        RandDistribute(ref xPos, ref yPos, ref rad,0);
 
         Hole thisHole =
         Instantiate(holePrefab, new Vector2(xPos, yPos), Quaternion.identity);
@@ -183,31 +184,32 @@ public class CircleController : MonoBehaviour
         holesInScene.Add(thisHole);
     }
 
-    Vector2 RandDistribute(ref float xPos, ref float yPos, ref float rad)
+    Vector2 RandDistribute(ref float xPos, ref float yPos, ref float rad, int recurDepth)
     {
         xPos = Random.Range(-1.6f, 1.6f);
         yPos = Random.Range(-2f, 4.1f);
         rad = Random.Range(radMin, radMax);
 
         Vector2 potentialPos = new Vector2(xPos, yPos);
-        if(Physics.CheckSphere(potentialPos, rad, 12))
+        if (Physics.CheckSphere(potentialPos, rad, 12) && recurDepth < 1000)
         {
-            RandDistribute(ref xPos, ref yPos, ref rad);
+            recurDepth++;
+            RandDistribute(ref xPos, ref yPos, ref rad, recurDepth);
         }
 
         return potentialPos;
     }
-    
+
     public void RestartGame()
     {
         //Disable game over screen, reset score, delete holes
         gameOverScreen.SetActive(false);
-        currScore = 0;
+        currScore = baseScore;
         DeleteAllHoles();
         SpawnNewHole();
         StartCoroutine(NewHoleTimer());
         ResetCirclePosAndColour();
-       
+
 
         //Just to be safe
         holding = false;
@@ -216,21 +218,14 @@ public class CircleController : MonoBehaviour
 
     public void ResetCirclePosAndColour()
     {
-        
-            currCircle.transform.position = circleSpawnPoint.transform.position;
-        
-            currCircle.GetComponent<Circle>().timerImg.enabled = false;
-        //Hard code just for proof of concept
-            currCircle.transform.localScale = new Vector3(2, 2, 0);
-        ResetColour();
-        
-    }
 
-    IEnumerator JustReleasedFingerCooldown()
-    {
-        dontUpdateCirclePos = true;
-        yield return new WaitForEndOfFrame();
-        dontUpdateCirclePos = false;
+        currCircle.transform.position = circleSpawnPoint.transform.position;
+
+        currCircle.GetComponent<Circle>().timerImg.enabled = false;
+        //Hard code just for proof of concept
+        currCircle.transform.localScale = new Vector3(2, 2, 0);
+        ResetColour();
+
     }
 
     // Update is called once per frame
@@ -239,23 +234,25 @@ public class CircleController : MonoBehaviour
         currScoreTxt.text = currScore.ToString();
         currHolesTxt.text = holesInScene.Count.ToString() + "/" + holesToSpawn.ToString();
         //Only run when game isn't over/Not paused
-        if (!gameOverScreen.activeInHierarchy && !pauseScreen.activeInHierarchy) 
+        if (!gameOverScreen.activeInHierarchy && !pauseScreen.activeInHierarchy)
         {
             if (!circleSpawnerRunning)
             {
                 StartCoroutine(NewHoleTimer());
             }
-            
+
 
             if (currScore < 0)
             {
                 EndGame();
             }
 
+
+
             if (Input.touchCount > 0)
             {
-
                 Touch touch = Input.GetTouch(0);
+                
 
                 // Handle finger movements based on TouchPhase
                 switch (touch.phase)
@@ -269,8 +266,10 @@ public class CircleController : MonoBehaviour
                         {
                             //Set holding to true
                             holding = true;
-
                         }
+
+
+
 
                         break;
 
@@ -285,6 +284,9 @@ public class CircleController : MonoBehaviour
                             //currCircle.GetComponent<Rigidbody>().isKinematic = true;
                             currCircle.transform.position = new Vector2(currPos.x, currPos.y);
                         }
+
+
+
                         break;
 
                     //When player lifts finger from screen
@@ -302,38 +304,44 @@ public class CircleController : MonoBehaviour
                         }
                         break;
                 }
-                //Manage pinch to zoom
-                if (Input.touchCount > 1 && holding)
-                {
-                    var touchZero = Input.GetTouch(0);
-                    var touchOne = Input.GetTouch(1);
 
-                    if (touchZero.phase == TouchPhase.Began || touchOne.phase == TouchPhase.Began)
+
+
+            if (Input.touchCount > 1 && holding)
+            {
+                    Touch touch1 = Input.GetTouch(1);
+                    switch (touch1.phase)
                     {
-                        initialDistance = Vector2.Distance(touchZero.position, touchOne.position);
-                        initialScale = currCircle.transform.localScale;
-                    }
-                    else
-                    {
-                        var currentDistance = Vector2.Distance(touchZero.position, touchOne.position);
+                        case TouchPhase.Began:
+                            initialDistance = Vector2.Distance(touch.position, touch1.position);
+                            initialScale = currCircle.transform.localScale;
+                            break;
 
-                        var factor = currentDistance / initialDistance;
+                        case TouchPhase.Moved:
+                            
+                            var currentDistance = Vector2.Distance(touch.position, touch1.position);
+                            
+                            var factor = currentDistance / initialDistance;
 
-                        if ((initialScale.x * factor) < radMax || (initialScale.x * factor) > radMin)
-                        {
-                            currCircle.transform.localScale = initialScale * factor;
-                        }
+                            if ((initialScale.x * factor) < radMax || (initialScale.x * factor) > radMin)
+                            {
+                                currCircle.transform.localScale = initialScale * factor;
+                            }
+                            break;
+
+                        //When player lifts finger from screen
+                        case TouchPhase.Ended:
+
+                            break;
                     }
+
                 }
-            }
-            
-        }
-        else
-        {
-            StopAllCoroutines();
-            circleSpawnerRunning = false;
-        }
 
-        
+            }
+        }
     }
 }
+        
+
+
+

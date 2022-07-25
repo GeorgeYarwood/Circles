@@ -926,7 +926,7 @@ MonoBehaviour:
   holePrefab: {fileID: 5400801489845405634, guid: 1e8c535e7cdc53e4681ddf3e9bc3b5fb, type: 3}
   holding: 0
   overCircle: 0
-  holesToSpawn: 8
+  holesToSpawn: 5
   dontUpdateCirclePos: 0
   currScoreTxt: {fileID: 513937534}
   currHolesTxt: {fileID: 1460485915}
@@ -936,9 +936,10 @@ MonoBehaviour:
   waitTimer: 1.5
   lowAccurateVal: 0.4
   highAccurateVal: 0.15
-  customGreen: {r: 163, g: 240, b: 171, a: 94}
-  customRed: {r: 163, g: 240, b: 171, a: 94}
-  customYellow: {r: 247, g: 243, b: 171, a: 97}
+  baseScore: 10
+  customGreen: {r: 0.4481132, g: 1, b: 0.5054521, a: 0.36862746}
+  customRed: {r: 0.9811321, g: 0.27568257, b: 0.19900322, a: 0.34509805}
+  customYellow: {r: 1, g: 0.9694638, b: 0.4198113, a: 0.38039216}
 --- !u!4 &839700375
 Transform:
   m_ObjectHideFlags: 0
