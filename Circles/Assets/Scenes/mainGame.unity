@@ -347,6 +347,51 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &286477125
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 286477127}
+  - component: {fileID: 286477126}
+  m_Layer: 0
+  m_Name: InterstitialAd
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &286477126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286477125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09725d9bee4869f42a97e2b0f63f757f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _androidAdUnitId: Interstitial_Android
+  _iOsAdUnitId: Interstitial_iOS
+--- !u!4 &286477127
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 286477125}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 574.9355, y: 373.91806, z: -3.1780508}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &354107768
 GameObject:
   m_ObjectHideFlags: 0
@@ -1020,6 +1065,7 @@ MonoBehaviour:
   overCircle: 0
   holesToSpawn: 5
   dontUpdateCirclePos: 0
+  pastAccuracy: []
   currScoreTxt: {fileID: 513937534}
   currHolesTxt: {fileID: 1460485915}
   circleSpawnPoint: {fileID: 354107768}
@@ -1390,6 +1436,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1941109201}
         m_TargetAssemblyTypeName: Button, Assembly-CSharp
         m_MethodName: PlayButtonNoise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 286477126}
+        m_TargetAssemblyTypeName: InterstitialAdExample, Assembly-CSharp
+        m_MethodName: ShowAd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2042,6 +2100,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1941109201}
         m_TargetAssemblyTypeName: Button, Assembly-CSharp
         m_MethodName: PlayButtonNoise
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 286477126}
+        m_TargetAssemblyTypeName: InterstitialAdExample, Assembly-CSharp
+        m_MethodName: ShowAd
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

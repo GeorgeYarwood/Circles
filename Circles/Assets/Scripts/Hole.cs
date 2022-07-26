@@ -148,7 +148,7 @@ public class Hole : MonoBehaviour
 
    float AccuracyCalc(float actualRad, float targetRad)
     {
-        float errorRate = ((actualRad - targetRad)/actualRad) *100;
+        float errorRate = (actualRad - targetRad)/actualRad *100;
         return (100 - errorRate);
     }
        

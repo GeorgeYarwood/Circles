@@ -54,6 +54,13 @@ public class CircleController : MonoBehaviour
     List<Hole> holesInScene = new List<Hole>();
 
     PlayServicesManager thisPlayServices;
+    InterstitialAdExample thisInterstitialAd;
+
+    private void Awake()
+    {
+        //Load ad now
+        //
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -61,7 +68,9 @@ public class CircleController : MonoBehaviour
         holesDestroyed = 0;
         currScore = baseScore;
         thisPlayServices = FindObjectOfType<PlayServicesManager>();
+        thisInterstitialAd = FindObjectOfType<InterstitialAdExample>();
         SpawnNewCircle();
+        thisInterstitialAd.LoadAd();
         //Spawn first hole
         SpawnNewHole();
         StartCoroutine(NewHoleTimer());
@@ -182,8 +191,9 @@ public class CircleController : MonoBehaviour
         {
             Social.ReportScore(currScore, GPGSIds.leaderboard_score, thisPlayServices.LeaderboardUpdate);
             Social.ReportScore(holesDestroyed, GPGSIds.leaderboard_holes_destroyed, thisPlayServices.LeaderboardUpdate);
-            Social.ReportScore((long)add, GPGSIds.leaderboard_accuracy, thisPlayServices.LeaderboardUpdate);
+            Social.ReportScore((long)accAvg, GPGSIds.leaderboard_accuracy, thisPlayServices.LeaderboardUpdate);
         }
+        thisInterstitialAd.ShowAd();
     }
 
     void SpawnNewHole()
@@ -203,7 +213,7 @@ public class CircleController : MonoBehaviour
         rad = Random.Range(radMin, radMax);
 
         Vector2 potentialPos = new Vector2(xPos, yPos);
-        if (Physics.CheckSphere(potentialPos, rad, 12) && recurDepth < 1000)
+        if (Physics.CheckSphere(potentialPos, rad, 12) && recurDepth < 3000)
         {
             recurDepth++;
             RandDistribute(ref xPos, ref yPos, ref rad, recurDepth);
