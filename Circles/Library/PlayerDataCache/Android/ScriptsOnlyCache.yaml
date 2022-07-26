@@ -971,4 +971,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/mainGameEasy.unity
   - Assets/Scenes/mainGameMedium.unity
   - Assets/Scenes/mainGameHard.unity
-  playerPath: C:/Users/georg/Desktop/version10.aab
+  playerPath: C:/Users/georg/Desktop/version12.aab

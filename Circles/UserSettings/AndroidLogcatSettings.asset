@@ -3,7 +3,7 @@
     "m_SelectedPackage": {
         "deviceId": "R5CR90CZEVD",
         "name": "com.TripHazard.Circles",
-        "processId": 5178,
+        "processId": 9952,
         "exited": false
     },
     "m_SelectedPriority": 0,
@@ -11,175 +11,49 @@
         {
             "deviceId": "R5CR90CZEVD",
             "name": "com.TripHazard.Circles",
-            "processId": 15343,
-            "exited": true
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 15554,
-            "exited": true
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 16370,
-            "exited": true
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 17891,
-            "exited": true
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 19312,
-            "exited": true
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 25531,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 29238,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 30565,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 31739,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 3451,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 9402,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 10435,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 11578,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 1818,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 3774,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 4228,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 7109,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 7806,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 12216,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 16762,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 17783,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 18601,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 20698,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 21305,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 22236,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 25082,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
-            "processId": 26335,
-            "exited": false
-        },
-        {
-            "deviceId": "R5CR90CZEVD",
-            "name": "com.TripHazard.Circles",
             "processId": 27903,
-            "exited": false
+            "exited": true
         },
         {
             "deviceId": "R5CR90CZEVD",
             "name": "com.TripHazard.Circles",
             "processId": 5178,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CR90CZEVD",
+            "name": "com.TripHazard.Circles",
+            "processId": 28455,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CR90CZEVD",
+            "name": "com.TripHazard.Circles",
+            "processId": 4098,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CR90CZEVD",
+            "name": "com.TripHazard.Circles",
+            "processId": 5826,
+            "exited": true
+        },
+        {
+            "deviceId": "R5CR90CZEVD",
+            "name": "com.TripHazard.Circles",
+            "processId": 7544,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR90CZEVD",
+            "name": "com.teslacoilsw.launcher",
+            "processId": 24379,
+            "exited": false
+        },
+        {
+            "deviceId": "R5CR90CZEVD",
+            "name": "com.TripHazard.Circles",
+            "processId": 9952,
             "exited": false
         }
     ],

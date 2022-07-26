@@ -3575,7 +3575,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _androidGameId: 4858321
   _iOSGameId: 
-  _testMode: 1
+  _testMode: 0
 --- !u!4 &1409525651
 Transform:
   m_ObjectHideFlags: 0
@@ -4488,7 +4488,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Circles v1.0
+  m_Text: Circles v1.2
 --- !u!222 &1985096540
 CanvasRenderer:
   m_ObjectHideFlags: 0

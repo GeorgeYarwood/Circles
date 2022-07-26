@@ -1309,7 +1309,7 @@ MonoBehaviour:
   gameOverScreen: {fileID: 753168643}
   pauseScreen: {fileID: 1795255878}
   tutorialScreen: {fileID: 1395614482}
-  waitTimer: 0.5
+  waitTimer: 0.8
   tutorial: 0
   lowAccurateVal: 0.4
   highAccurateVal: 0.15
