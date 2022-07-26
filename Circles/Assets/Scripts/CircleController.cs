@@ -35,12 +35,15 @@ public class CircleController : MonoBehaviour
 
     public GameObject gameOverScreen;
     public GameObject pauseScreen;
+    public GameObject tutorialScreen;
 
     //Time between each circle spawn
     public float waitTimer;
 
     bool dragging;
     bool circleSpawnerRunning;
+
+    public bool tutorial;
 
     //Values for each accuracy level:
     public float lowAccurateVal;
@@ -56,12 +59,7 @@ public class CircleController : MonoBehaviour
     PlayServicesManager thisPlayServices;
     InterstitialAdExample thisInterstitialAd;
 
-    private void Awake()
-    {
-        //Load ad now
-        //
-    }
-
+    const string TutorialKey = "TutorialKey";
     // Start is called before the first frame update
     void Start()
     {
@@ -72,8 +70,16 @@ public class CircleController : MonoBehaviour
         SpawnNewCircle();
         thisInterstitialAd.LoadAd();
         //Spawn first hole
+       
         SpawnNewHole();
         StartCoroutine(NewHoleTimer());
+
+        //Check if we've played the tutorial before
+        if (!PlayerPrefs.HasKey(TutorialKey))
+        {
+             PlayerPrefs.SetInt(TutorialKey, true ? 1 : 0);
+            tutorialScreen.SetActive(true);
+        }
     }
 
     public void AddScore(int amount)
@@ -256,7 +262,7 @@ public class CircleController : MonoBehaviour
         currScoreTxt.text = currScore.ToString();
         currHolesTxt.text = holesInScene.Count.ToString() + "/" + holesToSpawn.ToString();
         //Only run when game isn't over/Not paused
-        if (!gameOverScreen.activeInHierarchy && !pauseScreen.activeInHierarchy)
+        if (!gameOverScreen.activeInHierarchy && !pauseScreen.activeInHierarchy && !tutorialScreen.activeInHierarchy)
         {
             if (!circleSpawnerRunning)
             {
@@ -345,7 +351,7 @@ public class CircleController : MonoBehaviour
                             
                             var factor = currentDistance / initialDistance;
 
-                            if ((initialScale.x * factor) < radMax || (initialScale.x * factor) > radMin)
+                            if ((initialScale.x * factor) < (radMax + 0.3) && (initialScale.x * factor) > (radMin -0.2))
                             {
                                 currCircle.transform.localScale = initialScale * factor;
                             }

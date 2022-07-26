@@ -11,9 +11,17 @@ public class LvlLoader : MonoBehaviour
         
     }
 
-    public void LoadGame()
+    public void LoadGameEasy()
     {
         SceneManager.LoadScene(1);
+    }
+    public void LoadGameMedium()
+    {
+        SceneManager.LoadScene(2);
+    }
+    public void LoadGameHard()
+    {
+        SceneManager.LoadScene(3);
     }
     public void LoadMenu()
     {
