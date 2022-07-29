@@ -5,16 +5,16 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637944594768622665
-    m_Hash: 1038502477
+      ticks: 637947232909117904
+    m_Hash: 4256512484
   m_LockFileStatus:
     m_FilePath: C:/Users/georg/Documents/Circles/Circles/Packages/packages-lock.json
     m_PathExists: 1
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637944594768742687
-    m_Hash: 701873426
+      ticks: 637947232909315681
+    m_Hash: 967788253
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
 m_PackageAssets:
@@ -664,12 +664,12 @@ m_PackageAssets:
         url: 
         revision: 
         path: 
-    - packageId: com.unity.ads@3.7.5
+    - packageId: com.unity.ads@4.2.1
       testable: 0
       isDirectDependency: 1
-      version: 3.7.5
+      version: 4.2.1
       source: 1
-      resolvedPath: C:\Users\georg\Documents\Circles\Circles\Library\PackageCache\com.unity.ads@3.7.5
+      resolvedPath: C:\Users\georg\Documents\Circles\Circles\Library\PackageCache\com.unity.ads@4.2.1
       assetPath: Packages/com.unity.ads
       name: com.unity.ads
       displayName: Advertisement
@@ -802,13 +802,13 @@ m_PackageAssets:
       entitlements:
         isAllowed: 1
       isAssetStorePackage: 0
-      datePublishedTicks: 637635162230000000
+      datePublishedTicks: 637885795760000000
       documentationUrl: 
       hasRepository: 1
       repository:
         type: git
-        url: https://github.cds.internal.unity3d.com/unity/com.unity.ads.git
-        revision: 0e92fa56fc4e4cd1fa305e76a911acdae6386b96
+        url: https://github.com/Unity-Technologies/unity-ads-sdk.git
+        revision: 2394887e7494a4c082ca090c392bf622ca3f58a9
         path: 
     - packageId: com.unity.collab-proxy@1.15.12
       testable: 0
