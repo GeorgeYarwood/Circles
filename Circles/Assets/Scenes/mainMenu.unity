@@ -4488,7 +4488,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Circles v1.4
+  m_Text: Circles v1.5
 --- !u!222 &1985096540
 CanvasRenderer:
   m_ObjectHideFlags: 0
