@@ -17,6 +17,7 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.IK.Editor.dll:
     - UnityEditor.U2D.IK.IKEditorManager
+    - UnityEditor.U2D.IK.IKGizmos
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
     - UnityEditor.Tilemaps.GridPaletteBrushes
@@ -26,10 +27,11 @@ ScriptsOnlyBuild:
     - UnityEditor.Tilemaps.TileDragAndDropManager
     - UnityEditor.Tilemaps.TilemapPrefabStageHelper
     Unity.Mobile.AndroidLogcat.Editor.dll:
-    - Unity.Android.Logcat.AndroidLogcatConsoleWindow
     - Unity.Android.Logcat.AndroidLogcatManager
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
+    Unity.VectorGraphics.dll:
+    - Unity.VectorGraphics.SVGImage
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -296,6 +298,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 2526}
     - Class: 114
       Script: {instanceID: 2530}
+    - Class: 114
+      Script: {instanceID: 2786}
     - Class: 114
       Script: {instanceID: 2910}
     - Class: 114
@@ -951,7 +955,7 @@ ScriptsOnlyBuild:
     className: GridLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 0990ee405831ed5e024c981bb746bf50
+      Hash: 49fd9d6e46895ebf546a886877ccc798
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Hole

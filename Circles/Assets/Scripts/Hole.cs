@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Hole : MonoBehaviour
 {
@@ -15,12 +16,25 @@ public class Hole : MonoBehaviour
     float autoDropTimer = 50f;
     float remainingTime;
 
+    public Image holeTimerImg;
+    float puTimer = 3f;
+    float puRemainingTime;
+
     SoundController.AudioTypes soundToPlay;
     void Start()
     {
         gameObject.transform.localScale = new Vector3(radius, radius, 0);
         circleController = FindObjectOfType<CircleController>();
         soundController = FindObjectOfType<SoundController>();
+
+        holeTimerImg = GetComponentInChildren<Image>();
+        holeTimerImg.enabled = false;
+        puRemainingTime = puTimer;
+        if (isDestroyAll)
+        {
+            StartCoroutine(AutoDestroyTimer());
+            
+        }
     }
 
     IEnumerator AutoDropTimer(Circle thisCircle)
@@ -38,24 +52,42 @@ public class Hole : MonoBehaviour
         dropNow = true;
     }
 
+    IEnumerator AutoDestroyTimer()
+    {
+        holeTimerImg.enabled = true;
+        while(puRemainingTime > 0)
+        {
+            //set the fill amount to the remaining time
+            holeTimerImg.fillAmount = Mathf.InverseLerp(0, puTimer, puRemainingTime);
+            puRemainingTime--;
+            yield return new WaitForSeconds(1f);
+        }
+
+        circleController.DestroyThisHole(this);
+    }
+
     // Update is called once per frame
     void Update()
     {
         radius = gameObject.transform.localScale.x;
     }
 
+    void ResetCircleColour(Circle thisCircle)
+    {
+        circleController.ResetColour();
+        circleController.overCircle = false;
+        thisCircle.timerImg.enabled = false;
+        StopCoroutine(AutoDropTimer(thisCircle));
+        remainingTime = autoDropTimer;
+    }
 
     void OnTriggerExit(Collider collision)
     {
         Circle thisCircle;
         if (thisCircle = collision.gameObject.GetComponent<Circle>())
         {
+            ResetCircleColour(thisCircle);
             
-            circleController.ResetColour();
-            circleController.overCircle = false;
-            thisCircle.timerImg.enabled = false;
-            StopAllCoroutines();
-            remainingTime = autoDropTimer;
         }
 
        
@@ -154,6 +186,7 @@ public class Hole : MonoBehaviour
             }
             else
             {
+                ResetCircleColour(thisCircle);
                 circleController.overCircle = false;
             }
          }
@@ -172,7 +205,7 @@ public class Hole : MonoBehaviour
         }
       
         Debug.Log(accuracy);
-        return (accuracy * 100);
+        return (accuracy);
     }
        
 }

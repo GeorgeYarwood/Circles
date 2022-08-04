@@ -63,6 +63,8 @@ public class CircleController : MonoBehaviour
     InterstitialAdExample thisInterstitialAd;
 
     const string TutorialKey = "TutorialKey";
+    const string LifetimeHolesDestroyed = "LifetimeHolesDestroyed";
+
     // Start is called before the first frame update
     void Start()
     {
@@ -73,7 +75,7 @@ public class CircleController : MonoBehaviour
         SpawnNewCircle();
         thisInterstitialAd.LoadAd();
         //Spawn first hole
-       
+        puInScene = false;
         SpawnNewHole();
         StartCoroutine(NewHoleTimer());
 
@@ -82,6 +84,11 @@ public class CircleController : MonoBehaviour
         {
              PlayerPrefs.SetInt(TutorialKey, true ? 1 : 0);
             tutorialScreen.SetActive(true);
+        }
+        //Start logging total holes destroyed
+        if (!PlayerPrefs.HasKey(LifetimeHolesDestroyed))
+        {
+            PlayerPrefs.SetInt(LifetimeHolesDestroyed, 0);
         }
     }
 
@@ -184,25 +191,33 @@ public class CircleController : MonoBehaviour
 
     }
 
+    public void SaveScore()
+    {
+        float add = 0;
+        for (int i = 0; i < pastAccuracy.Count; i++)
+        {
+            add += pastAccuracy[i];
+        }
+        float accAvg = add / (pastAccuracy.Count);
+        //Upload score to Google play
+        if (thisPlayServices.connectedToGooglePlay)
+        {
+            //Get this user
+            var user = PlayGamesPlatform.Instance.localUser.id;
+            int runningTotal = holesDestroyed += PlayerPrefs.GetInt(LifetimeHolesDestroyed);
+            Social.ReportScore(currScore, GPGSIds.leaderboard_score, thisPlayServices.LeaderboardUpdate);
+            PlayerPrefs.SetInt(LifetimeHolesDestroyed, runningTotal);
+            Social.ReportScore(runningTotal, GPGSIds.leaderboard_holes_destroyed, thisPlayServices.LeaderboardUpdate);
+            Social.ReportScore((long)accAvg, GPGSIds.leaderboard_accuracy, thisPlayServices.LeaderboardUpdate);
+        }
+    }
+
     void EndGame()
     {
 
         gameOverScreen.SetActive(true);
 
-        float add= 0;
-        for(int i = 0; i < pastAccuracy.Count; i++)
-        {
-            add += pastAccuracy[i];
-        }
-        float accAvg = add / pastAccuracy.Count;
-        Debug.Log(accAvg);
-        //Upload score to Google play
-        if (thisPlayServices.connectedToGooglePlay)
-        {
-            Social.ReportScore(currScore, GPGSIds.leaderboard_score, thisPlayServices.LeaderboardUpdate);
-            Social.ReportScore(holesDestroyed, GPGSIds.leaderboard_holes_destroyed, thisPlayServices.LeaderboardUpdate);
-            Social.ReportScore((long)accAvg, GPGSIds.leaderboard_accuracy, thisPlayServices.LeaderboardUpdate);
-        }
+        SaveScore();
         thisInterstitialAd.ShowAd();
     }
 
@@ -211,7 +226,7 @@ public class CircleController : MonoBehaviour
         RandDistribute(ref xPos, ref yPos, ref rad,0);
         Hole thisHole;
         //1 in 5 chance of spawning power up
-        if (holesInScene.Count >= 3 && Random.Range(0, 6) == 5)
+        if (holesInScene.Count >= 3 && Random.Range(0, 6) == 5 && !puInScene)
         {
             thisHole = Instantiate(holeDestroyAllPrefab, new Vector2(xPos, yPos), Quaternion.identity);
             puInScene = true;
@@ -229,7 +244,7 @@ public class CircleController : MonoBehaviour
     Vector2 RandDistribute(ref float xPos, ref float yPos, ref float rad, int recurDepth)
     {
         xPos = Random.Range(-1.6f, 1.6f);
-        yPos = Random.Range(-2f,4.1f);
+        yPos = Random.Range(-2f,4.2f);
         rad = Random.Range(radMin, radMax);
 
         Vector2 potentialPos = new Vector2(xPos, yPos);
