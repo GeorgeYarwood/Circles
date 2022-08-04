@@ -10,7 +10,8 @@ public class Hole : MonoBehaviour
     CircleController circleController;
     SoundController soundController;
     bool dropNow;
-
+    public bool isDestroyAll;
+    public bool isDoublePoints;
     float autoDropTimer = 50f;
     float remainingTime;
 
@@ -132,6 +133,18 @@ public class Hole : MonoBehaviour
                         scoreToAdd -= 2;
                     }
 
+                    if (isDestroyAll)
+                    {
+                        circleController.puInScene = false;
+                        if (scoreToAdd > 0)
+                        {
+                            circleController.DeleteAllHoles();
+                            circleController.AddScore(100);
+                        }
+                        
+                        
+                    }
+
                     circleController.pastAccuracy.Add(AccuracyCalc(thisCircle.radius, radius));
                     soundController.PlaySound(soundToPlay);
 
@@ -148,8 +161,18 @@ public class Hole : MonoBehaviour
 
    float AccuracyCalc(float actualRad, float targetRad)
     {
-        float errorRate = (actualRad - targetRad)/actualRad *100;
-        return (100 - errorRate);
+        float accuracy;
+        if (actualRad < targetRad)
+        {
+            accuracy = (actualRad / targetRad) * 100;
+        }
+        else
+        {
+            accuracy =  (targetRad / actualRad) * 100;
+        }
+      
+        Debug.Log(accuracy);
+        return (accuracy * 100);
     }
        
 }

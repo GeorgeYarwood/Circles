@@ -12,11 +12,13 @@ public class CircleController : MonoBehaviour
     GameObject currCircle;
     public Circle circlePrefab;
     public Hole holePrefab;
+    public Hole holeDestroyAllPrefab;
+    public Hole holeDoublePointsPrefab;
 
     private float initialDistance;
     private Vector3 initialScale;
 
-    float radMax = 2.5f;
+    float radMax = 2.35f;
     float radMin = 1.2f;
 
     public bool holding;
@@ -44,6 +46,7 @@ public class CircleController : MonoBehaviour
     bool circleSpawnerRunning;
 
     public bool tutorial;
+    public bool puInScene;
 
     //Values for each accuracy level:
     public float lowAccurateVal;
@@ -142,7 +145,7 @@ public class CircleController : MonoBehaviour
         while (true)
         {
             circleSpawnerRunning = true;
-            if (holesInScene.Count < holesToSpawn)
+            if (holesInScene.Count <= holesToSpawn)
             {
 
                 yield return new WaitForSeconds(waitTimer);
@@ -192,6 +195,7 @@ public class CircleController : MonoBehaviour
             add += pastAccuracy[i];
         }
         float accAvg = add / pastAccuracy.Count;
+        Debug.Log(accAvg);
         //Upload score to Google play
         if (thisPlayServices.connectedToGooglePlay)
         {
@@ -205,9 +209,19 @@ public class CircleController : MonoBehaviour
     void SpawnNewHole()
     {
         RandDistribute(ref xPos, ref yPos, ref rad,0);
+        Hole thisHole;
+        //1 in 5 chance of spawning power up
+        if (holesInScene.Count >= 3 && Random.Range(0, 6) == 5)
+        {
+            thisHole = Instantiate(holeDestroyAllPrefab, new Vector2(xPos, yPos), Quaternion.identity);
+            puInScene = true;
+        }
+        else
+        {
+            thisHole = Instantiate(holePrefab, new Vector2(xPos, yPos), Quaternion.identity);
+           
+        }
 
-        Hole thisHole =
-        Instantiate(holePrefab, new Vector2(xPos, yPos), Quaternion.identity);
         thisHole.radius = rad;
         holesInScene.Add(thisHole);
     }
@@ -215,7 +229,7 @@ public class CircleController : MonoBehaviour
     Vector2 RandDistribute(ref float xPos, ref float yPos, ref float rad, int recurDepth)
     {
         xPos = Random.Range(-1.6f, 1.6f);
-        yPos = Random.Range(-2f, 4.1f);
+        yPos = Random.Range(-2f,4.1f);
         rad = Random.Range(radMin, radMax);
 
         Vector2 potentialPos = new Vector2(xPos, yPos);
@@ -274,8 +288,6 @@ public class CircleController : MonoBehaviour
             {
                 EndGame();
             }
-
-
 
             if (Input.touchCount > 0)
             {

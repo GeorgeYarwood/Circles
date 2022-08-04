@@ -1298,6 +1298,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   circlePrefab: {fileID: 7701030968560344898, guid: c49ab793445e6014b9f35cb4e35b130b, type: 3}
   holePrefab: {fileID: 5400801489845405634, guid: 1e8c535e7cdc53e4681ddf3e9bc3b5fb, type: 3}
+  holeDestroyAllPrefab: {fileID: 8947527827750799211, guid: 98559eb9f589c1442a9d62eda85c0e96, type: 3}
+  holeDoublePointsPrefab: {fileID: 8947527827750799211, guid: e2532f0a5e1e39f47be39be4bab3f119, type: 3}
   holding: 0
   overCircle: 0
   holesToSpawn: 5
@@ -1309,7 +1311,7 @@ MonoBehaviour:
   gameOverScreen: {fileID: 753168643}
   pauseScreen: {fileID: 1795255878}
   tutorialScreen: {fileID: 1395614482}
-  waitTimer: 5
+  waitTimer: 3.5
   tutorial: 0
   lowAccurateVal: 0.4
   highAccurateVal: 0.15

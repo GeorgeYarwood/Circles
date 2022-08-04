@@ -9,6 +9,7 @@ ScriptsOnlyBuild:
     - InterstitialAdExample
     - LeaderboardBtn
     - LvlLoader
+    - ModeSelectionController
     - PlayServicesManager
     - SettingsHandler
     - SoundController
@@ -16,7 +17,6 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.IK.Editor.dll:
     - UnityEditor.U2D.IK.IKEditorManager
-    - UnityEditor.U2D.IK.IKGizmos
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridPaintingState
     - UnityEditor.Tilemaps.GridPaletteBrushes
@@ -34,6 +34,9 @@ ScriptsOnlyBuild:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
     - UnityEditor.TestTools.TestRunner.TestRun.TestJobDataHolder
+    UnityEngine.Advertisements.dll:
+    - UnityEngine.Advertisements.Placeholder
+    - UnityEngine.Advertisements.Platform.Editor.BannerPlaceholder
     UnityEngine.UI.dll:
     - UnityEngine.EventSystems.EventSystem
     - UnityEngine.EventSystems.StandaloneInputModule
@@ -75,27 +78,27 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1816}
     - Class: 114
-      Script: {instanceID: 2528}
+      Script: {instanceID: 2530}
     - Class: 114
-      Script: {instanceID: 3012}
+      Script: {instanceID: 3014}
     - Class: 114
-      Script: {instanceID: 3212}
+      Script: {instanceID: 3214}
     - Class: 114
-      Script: {instanceID: 3516}
+      Script: {instanceID: 3518}
     - Class: 114
-      Script: {instanceID: 3798}
+      Script: {instanceID: 3800}
     - Class: 114
-      Script: {instanceID: 3946}
+      Script: {instanceID: 3948}
     - Class: 114
-      Script: {instanceID: 5192}
+      Script: {instanceID: 5194}
     - Class: 114
-      Script: {instanceID: 5652}
+      Script: {instanceID: 5654}
     - Class: 114
-      Script: {instanceID: 6034}
+      Script: {instanceID: 6036}
     - Class: 114
-      Script: {instanceID: 6278}
+      Script: {instanceID: 6280}
     - Class: 114
-      Script: {instanceID: 6586}
+      Script: {instanceID: 6588}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -148,27 +151,27 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1816}
     - Class: 114
-      Script: {instanceID: 2528}
+      Script: {instanceID: 2530}
     - Class: 114
-      Script: {instanceID: 3012}
+      Script: {instanceID: 3014}
     - Class: 114
-      Script: {instanceID: 3212}
+      Script: {instanceID: 3214}
     - Class: 114
-      Script: {instanceID: 3516}
+      Script: {instanceID: 3518}
     - Class: 114
-      Script: {instanceID: 3798}
+      Script: {instanceID: 3800}
     - Class: 114
-      Script: {instanceID: 3946}
+      Script: {instanceID: 3948}
     - Class: 114
-      Script: {instanceID: 5192}
+      Script: {instanceID: 5194}
     - Class: 114
-      Script: {instanceID: 5652}
+      Script: {instanceID: 5654}
     - Class: 114
-      Script: {instanceID: 6034}
+      Script: {instanceID: 6036}
     - Class: 114
-      Script: {instanceID: 6278}
+      Script: {instanceID: 6280}
     - Class: 114
-      Script: {instanceID: 6586}
+      Script: {instanceID: 6588}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -221,27 +224,27 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1816}
     - Class: 114
-      Script: {instanceID: 2528}
+      Script: {instanceID: 2530}
     - Class: 114
-      Script: {instanceID: 3012}
+      Script: {instanceID: 3014}
     - Class: 114
-      Script: {instanceID: 3212}
+      Script: {instanceID: 3214}
     - Class: 114
-      Script: {instanceID: 3516}
+      Script: {instanceID: 3518}
     - Class: 114
-      Script: {instanceID: 3798}
+      Script: {instanceID: 3800}
     - Class: 114
-      Script: {instanceID: 3946}
+      Script: {instanceID: 3948}
     - Class: 114
-      Script: {instanceID: 5192}
+      Script: {instanceID: 5194}
     - Class: 114
-      Script: {instanceID: 5652}
+      Script: {instanceID: 5654}
     - Class: 114
-      Script: {instanceID: 6034}
+      Script: {instanceID: 6036}
     - Class: 114
-      Script: {instanceID: 6278}
+      Script: {instanceID: 6280}
     - Class: 114
-      Script: {instanceID: 6586}
+      Script: {instanceID: 6588}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -286,29 +289,31 @@ ScriptsOnlyBuild:
     - Class: 114
       Script: {instanceID: 1816}
     - Class: 114
-      Script: {instanceID: 2450}
+      Script: {instanceID: 2182}
     - Class: 114
-      Script: {instanceID: 2524}
+      Script: {instanceID: 2452}
     - Class: 114
-      Script: {instanceID: 2528}
+      Script: {instanceID: 2526}
     - Class: 114
-      Script: {instanceID: 2908}
+      Script: {instanceID: 2530}
     - Class: 114
-      Script: {instanceID: 3012}
+      Script: {instanceID: 2910}
     - Class: 114
-      Script: {instanceID: 3212}
+      Script: {instanceID: 3014}
     - Class: 114
-      Script: {instanceID: 3516}
+      Script: {instanceID: 3214}
     - Class: 114
-      Script: {instanceID: 3798}
+      Script: {instanceID: 3518}
     - Class: 114
-      Script: {instanceID: 3946}
+      Script: {instanceID: 3800}
     - Class: 114
-      Script: {instanceID: 4334}
+      Script: {instanceID: 3948}
     - Class: 114
-      Script: {instanceID: 5232}
+      Script: {instanceID: 4336}
     - Class: 114
-      Script: {instanceID: 5652}
+      Script: {instanceID: 5234}
+    - Class: 114
+      Script: {instanceID: 5654}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -422,6 +427,12 @@ ScriptsOnlyBuild:
     assemblyName: Google.Play.Games.dll
     namespaceName: GooglePlayGames.OurUtils
     className: NearbyHelperObject
+  - hash:
+      serializedVersion: 2
+      Hash: 3b6b518ca96e362c7359eb4f5e12ec9b
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: ModeSelectionController
   - hash:
       serializedVersion: 2
       Hash: 71bb6a6b6c8f052f948db64c7dd3ca4f
@@ -910,7 +921,7 @@ ScriptsOnlyBuild:
     className: TMP_ScrollbarEventHandler
   - hash:
       serializedVersion: 2
-      Hash: 250191a877826c2595c36f49dd6ae799
+      Hash: 5f194af178d5164325d0815bc2d2d9c3
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: CircleController
@@ -940,7 +951,7 @@ ScriptsOnlyBuild:
     className: GridLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: bf4698a3b70ae92d7166ab31c3de7991
+      Hash: 0990ee405831ed5e024c981bb746bf50
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Hole
@@ -956,10 +967,16 @@ ScriptsOnlyBuild:
     assemblyName: Unity.2D.IK.Runtime.dll
     namespaceName: UnityEngine.U2D.IK
     className: FabrikSolver2D
+  - hash:
+      serializedVersion: 2
+      Hash: 695100c4f81f939cc44919e2a09dd6b0
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: PowerUp
   platform: 13
   scenePathNames:
   - Assets/Scenes/mainMenu.unity
   - Assets/Scenes/mainGameEasy.unity
   - Assets/Scenes/mainGameMedium.unity
   - Assets/Scenes/mainGameHard.unity
-  playerPath: C:/Users/georg/Desktop/version16.aab
+  playerPath: C:/Users/georg/Desktop/version18.aab

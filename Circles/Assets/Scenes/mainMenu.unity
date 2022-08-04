@@ -514,6 +514,7 @@ GameObject:
   - component: {fileID: 157937728}
   - component: {fileID: 157937730}
   - component: {fileID: 157937729}
+  - component: {fileID: 157937731}
   m_Layer: 5
   m_Name: modeSelection
   m_TagString: Untagged
@@ -580,6 +581,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 157937727}
   m_CullTransparentMesh: 1
+--- !u!114 &157937731
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 157937727}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8adb5f8cf7d517748bd421a8723a5507, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mediumBtn: {fileID: 352923625}
+  hardBtn: {fileID: 1034121980}
 --- !u!1 &194708664
 GameObject:
   m_ObjectHideFlags: 0
@@ -2805,7 +2820,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 25.265015, y: 61}
+  m_AnchoredPosition: {x: 37.799988, y: 50.19995}
   m_SizeDelta: {x: 412.53003, y: 95.25415}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1151626737
@@ -3535,7 +3550,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Medium
+  m_Text: Normal
 --- !u!222 &1402517205
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -4452,7 +4467,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: 25.265015, y: 156}
+  m_AnchoredPosition: {x: 36.9, y: 88.6}
   m_SizeDelta: {x: 412.5301, y: 95.25415}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!114 &1985096539
@@ -4488,7 +4503,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Circles v1.5
+  m_Text: 'Circles v1.7
+
+'
 --- !u!222 &1985096540
 CanvasRenderer:
   m_ObjectHideFlags: 0
